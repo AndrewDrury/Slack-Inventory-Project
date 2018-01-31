@@ -12,7 +12,7 @@ function timeStampSignOut(){
   sheet.getRange(row,6,1,1).setValue(timestamp);
 }
 
-// search for user's item request
+// user searches for item in inventory
 function search() {
   var uniqueID = 42854; // UNIQUE ID SHOULD BE SET TO WHAT USER SEARCHES (once we figure out how to get cutom commands working)
   
@@ -98,4 +98,16 @@ function sendItemToSlack(item) {
   };
   
   return UrlFetchApp.fetch(url,options);
+}
+
+
+// sign all items in
+function signAllItemsIn() {
+  var startRow = 2;
+  var lastRow = sheet.getLastRow();
+  var userNameCol = 5;
+  var availableCol = 4;
+  
+  sheet.getRange(startRow,userNameCol,lastRow-1,2).setValue("");
+  sheet.getRange(startRow,availableCol,lastRow-1,1).setValue("Yes");
 }
